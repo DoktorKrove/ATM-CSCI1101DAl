@@ -12,4 +12,49 @@ public class User
    {
       //requires bank to be finished
    }
+   
+   public String getUserID()
+   {
+      return userID;
+   }
+   
+   public void addAccount(Account acc)
+   {
+      //requires Account
+   }
+   
+   public int numAccounts()
+   {
+      //returns size of account arraylist
+   }
+   
+   public double getAccBalance(int accindex)//Not sure what this is. Account array index?
+   {
+   
+   }
+   
+   public String getAccID(int accindex)//Not sure what this is. same as above
+   {
+   
+   }
+   
+   public void printAccHistory(int accindex)
+   {
+   
+   }
+   
+   public void addAccTransaction(int accindex, double amount, String memo)
+   {
+   
+   }
+   
+   public boolean validatePin(String aPin)
+   {
+   
+   }
+   
+   public void printAccountsSummary()
+   {
+   
+   }
 }
