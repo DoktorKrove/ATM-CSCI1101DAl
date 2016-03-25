@@ -1,5 +1,6 @@
-import java.util.ArrayList
+import java.util.ArrayList;
 
+//Aggregates from account
 public class User
 {
    private String firstName;
