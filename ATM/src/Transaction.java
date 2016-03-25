@@ -1,3 +1,5 @@
+import java.sql.Date;
+
 //Transaction class
 
 public class Transaction
@@ -5,7 +7,7 @@ public class Transaction
    private double amount;
    private String memo;
    //private Account inAccount; - requires account to be finished
-   private timeStamp Date; //unsure of usage. Utilize java.time.LocalDateTime??
+   private Date timeStamp; //unsure of usage. Utilize java.time.LocalDateTime??
    
    public Transaction(double amount /*, Account inAccount*/);
    {
