@@ -11,7 +11,10 @@ public class Transaction
    
    public Transaction(double amount /*, Account inAccount*/);
    {
-   
+      this.amount = amount;
+      //this.inAccount = inAccount;
+      this.timeStamp = timeStamp;
+
    }
    
    public Transaction(double amount, String memo /*, Account inAccount*/);
@@ -27,35 +30,5 @@ public class Transaction
    public String getSummaryLine()
    {
       return memo;
-   }
-   
-   public double getAccBalance(int accindex)//Not sure what this is. Account array index?
-   {
-   
-   }
-   
-   public String getAccID(int accindex)//Not sure what this is. same as above
-   {
-   
-   }
-   
-   public void printAccHistory(int accindex)
-   {
-   
-   }
-   
-   public void addAccTransaction(int accindex, double amount, String memo)
-   {
-   
-   }
-   
-   public boolean validatePin(String aPin)
-   {
-   
-   }
-   
-   public void printAccountsSummary()
-   {
-   
    }
 }
