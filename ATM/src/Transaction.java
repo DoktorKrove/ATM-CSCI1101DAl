@@ -19,7 +19,8 @@ public class Transaction
    
    public Transaction(double amount, String memo /*, Account inAccount*/);
    {
-   
+      this(amount, /*inAccount*/); //call the single-arg constructor
+      this.memo = memo;
    }
    
    public double getAmount()
