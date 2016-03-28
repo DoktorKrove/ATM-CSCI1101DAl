@@ -11,6 +11,8 @@ public class Bank
 	public Bank(String name)
 	{
 		this.name = name;
+		users = new ArrayList<User>();
+		accounts = new ArrayList<Account>();
 	}
 	
 	public String getNewUserID()
@@ -27,6 +29,7 @@ public class Bank
 
 	public void addAccount(Account newAccount)
 	{
+		this.accounts.add(newAccount);
 	}
 	
 	public User userLogin(String userID, String pin)
@@ -35,5 +38,6 @@ public class Bank
 	
 	public String getName()
 	{
+		return this.name;
 	}
 }
