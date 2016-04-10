@@ -29,33 +29,50 @@ public class User
       //returns size of account arraylist
    }
    
-   public double getAccBalance(int accindex)//Not sure what this is. Account array index?
+   public double getAccBalance(int accindex)
    {
-   
+      return this.accounts.get(accindex).getBalance();
    }
    
-   public String getAccID(int accindex)//Not sure what this is. same as above
+   public String getAccID(int accindex)
    {
-   
+      return this.accounts.get(accindex).getUserID();
+
    }
    
    public void printAccHistory(int accindex)
    {
-   
+      this.accounts.get(accindex).printTransHistory();
    }
    
    public void addAccTransaction(int accindex, double amount, String memo)
    {
-   
+      this.accounts.get(accindex).addTransaction(amount, memo);
    }
    
    public boolean validatePin(String aPin)
    {
-   
+      try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			return MessageDigest.isEqual(md.digest(aPin.getBytes()), this.pinHash);
+		} 
+		catch (Exception e) 
+		{
+			System.err.println("error, caught exeption : " + e.getMessage());
+			System.exit(1);
+		}
+		
+		return false;
    }
    
    public void printAccountsSummary()
    {
-   
+      System.out.printf("\n\n%s's accounts summary\n", this.firstName);
+		for (int a = 0; a < this.accounts.size(); a++) 
+		{
+			System.out.printf("%d) %s\n", a+1, 
+					this.accounts.get(a).getSummaryLine());
+		}
+		System.out.println();
    }
 }
