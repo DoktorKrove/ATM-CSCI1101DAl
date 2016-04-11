@@ -2,9 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.*;
+import java.text.ParseException;
+import javax.swing.text.MaskFormatter;
 
 
-public class ATMTest extends JFrame{ //implements ActionListener{
+public class ATMTest extends JFrame implements ActionListener{
    //panel parts
    private JPanel panel, layer1, layer2, keypad, control, functions;
    private JButton one,two,three,four,five,six,seven,eight,nine,zero,enter,clear,
@@ -13,7 +15,7 @@ public class ATMTest extends JFrame{ //implements ActionListener{
    //private JTextField;
    private JFormattedTextField textField, pinArea;
    
-   public ATMTest(){
+   public ATMTest() throws ParseException{
       //create panels
       panel = new JPanel();
       layer1 = new JPanel(new GridLayout(2,1));
@@ -28,9 +30,9 @@ public class ATMTest extends JFrame{ //implements ActionListener{
       
       layer1.add(textField);
       
-      pinArea = new JFormattedTextField(/*new MaskFormatter("****")*/);
+      pinArea = new JFormattedTextField(new MaskFormatter("****"));
       pinArea.setEditable(false);
-      pinArea.setColumns(4);
+      pinArea.setColumns(5);
       layer2.add(pinArea);
       
       accept = new JButton("Accept");
@@ -41,22 +43,22 @@ public class ATMTest extends JFrame{ //implements ActionListener{
       
       accountInfo = new JButton("Account Information");
       accountInfo.setFont(newButtonFont);
-      //accept.addActionListener(this);
+      //accountInfo.addActionListener(this);
       functions.add(accountInfo);
       
       withdraw = new JButton("Account Withdraw");
       withdraw.setFont(newButtonFont);
-      //accept.addActionListener(this);
+      //withdraw.addActionListener(this);
       functions.add(withdraw);
       
       deposit = new JButton("Account Deposit");
       deposit.setFont(newButtonFont);
-      //accept.addActionListener(this);
+      //deposit.addActionListener(this);
       functions.add(deposit);
       
       cancel = new JButton("Cancel");
       cancel.setFont(newButtonFont);
-      //accept.addActionListener(this);
+      //cancel.addActionListener(this);
       functions.add(cancel);
       
       
@@ -64,33 +66,45 @@ public class ATMTest extends JFrame{ //implements ActionListener{
         two = new JButton(String.valueOf(2));
         three = new JButton(String.valueOf(3));
         keypad.add(one);
+        one.addActionListener(this);
         keypad.add(two);
+        two.addActionListener(this);
         keypad.add(three);
+        three.addActionListener(this);
 
         
         four = new JButton(String.valueOf(4));
         five = new JButton(String.valueOf(5));
         six = new JButton(String.valueOf(6));
         keypad.add(four);
+        four.addActionListener(this);
         keypad.add(five);
+        five.addActionListener(this);
         keypad.add(six);
+        six.addActionListener(this);
 
         
         seven = new JButton(String.valueOf(7));
         eight = new JButton(String.valueOf(8));
         nine = new JButton(String.valueOf(9));
         keypad.add(seven);
+        seven.addActionListener(this);
         keypad.add(eight);
+        eight.addActionListener(this);
         keypad.add(nine);
+        nine.addActionListener(this);
 
         enter = new JButton("Enter");
         keypad.add(enter);
+        enter.addActionListener(this);
         
         zero = new JButton(String.valueOf(0));
         keypad.add(zero);
+        zero.addActionListener(this);
         
         clear = new JButton("Clear");
         keypad.add(clear);
+        clear.addActionListener(this);
        
       control.add(functions);
       control.add(keypad);
@@ -107,8 +121,43 @@ public class ATMTest extends JFrame{ //implements ActionListener{
       setVisible(true);
    }
    
+   @Override
+    public final void actionPerformed(final ActionEvent e) {
+        final JButton source = (JButton)e.getSource();
+        if(source.equals(enter)){
+            if(pinArea.getValue() != null && pinArea.getValue().toString().length() != 4){
+                JOptionPane.showMessageDialog(this, "Invalid PIN length - must be 4 digits long.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Valid PIN length.", "Valid", JOptionPane.INFORMATION_MESSAGE);
+            }
+            clear.doClick();
+        }
+        else if(source.equals(clear)){
+            pinArea.setValue(null);
+        }
+        else{
+            final StringBuilder sb = new StringBuilder();
+            if(pinArea.getValue() != null){
+                for(char c: pinArea.getValue().toString().toCharArray()){
+                    sb.append(c);
+                }
+            }
+
+            if(sb.length() != 4){
+                sb.append(source.getText());
+                pinArea.setValue(sb);
+            }
+        }
+    }
+   
    //main 
    public static void main(String[] args){
-      ATMTest ATM = new ATMTest();
+      try
+      {
+         ATMTest ATM = new ATMTest();
+      }catch (ParseException e) {
+         e.printStackTrace();
+       }
    }
 }
