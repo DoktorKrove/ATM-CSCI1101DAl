@@ -1,21 +1,22 @@
 import java.util.ArrayList;
 
 //Aggregates from transaction
-public class Account {
+public class Account 
+{
 
-	String name, userID;
-	User holder;
-	ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+	private double balance;
+	private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 
 
-	public Account(String name, User holder, Bank theBank)
+	public Account()
 	{
-		this.name = name;
-		this.holder = holder;
+		balance = 0;
+		transactions = new ArrayList<Transaction>();
 	}
 
-	public String getUserID() {
-		return userID;
+	public double getBalance() 
+   {
+		return balance;
 	}
 	
 
@@ -25,10 +26,6 @@ public class Account {
 
 	
 	public void addTransaction(double amount, String memo)
-	{
-	}
-
-	public double getBalence()
 	{
 	}
 
