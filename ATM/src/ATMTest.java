@@ -30,7 +30,11 @@ public class ATMTest extends JFrame implements ActionListener{
       keypad = new JPanel(new GridLayout(4,3));
       functions = new JPanel(new GridLayout(5,1));
       
-      front = new JLabel("Hello welcome to -Bank! For use, please insert BankID and PIN.");
+      Bank bank = new Bank("JoelBank");
+      User u1 = new User("Joel", "Fong",  "123456789", 1111);
+      bank.addUser(u1);
+      
+      front = new JLabel("Hello welcome to "+ bank.getName() + "! For use, please insert BankID and PIN.");
       panel.add(front);
       
       welcome = new JLabel("Welcome user" + /*user.getName() +*/ ". What do you want to do?");
@@ -238,5 +242,6 @@ public class ATMTest extends JFrame implements ActionListener{
       }catch (ParseException e) {
          e.printStackTrace();
        }
+       
    }
 }
