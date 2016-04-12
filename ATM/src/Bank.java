@@ -18,6 +18,10 @@ public class Bank
 		return this.name;
 	}
 	
+   public void addUser(User user)
+   {
+      users.add(user);
+   }
    
    public boolean findUser(User user)
    {
