@@ -11,9 +11,15 @@ public class ATMTest extends JFrame implements ActionListener{
    private JPanel panel, layer1, layer2, keypad, control, functions;
    private JButton one,two,three,four,five,six,seven,eight,nine,zero,enter,clear,
                    accept,cancel,deposit,withdraw,accountInfo;
-   //private JLabel;
+   private JLabel front, welcome, info, withdrawMes, depositMes, withYes, depYes;
    //private JTextField;
    private JFormattedTextField textField, pinArea;
+   
+   //Bank parts
+   private Bank bank;
+   private User user;
+   private Account account;
+   private Transaction transaction;
    
    public ATMTest() throws ParseException{
       //create panels
@@ -24,8 +30,35 @@ public class ATMTest extends JFrame implements ActionListener{
       keypad = new JPanel(new GridLayout(4,3));
       functions = new JPanel(new GridLayout(5,1));
       
-      textField = new JFormattedTextField();
-      textField.setEditable(false);
+      front = new JLabel("Hello welcome to -Bank! For use, please insert BankID and PIN.");
+      panel.add(front);
+      
+      welcome = new JLabel("Welcome user" + /*user.getName() +*/ ". What do you want to do?");
+      panel.add(welcome);
+      welcome.setVisible(false);
+      
+      withdrawMes = new JLabel("Insert how much you wish to withdraw.");
+      panel.add(withdrawMes);
+      withdrawMes.setVisible(false);
+      
+      depositMes = new JLabel("Insert how much you want to deposit.");
+      panel.add(depositMes);
+      depositMes.setVisible(false);
+      
+      withYes = new JLabel("Withdraw Success");
+      panel.add(withYes);
+      withYes.setVisible(false);
+      
+      depYes = new JLabel("Deposit Success");
+      panel.add(depYes);
+      depYes.setVisible(false);
+      
+      info = new JLabel("User name: Name \n User ID: ID \n User Balance: Monayyyy");
+      panel.add(info);
+      info.setVisible(false);
+      
+      textField = new JFormattedTextField(new MaskFormatter("*********"));
+      textField.setEditable(true);
       textField.setColumns(25);
       
       layer1.add(textField);
@@ -43,22 +76,22 @@ public class ATMTest extends JFrame implements ActionListener{
       
       accountInfo = new JButton("Account Information");
       accountInfo.setFont(newButtonFont);
-      //accountInfo.addActionListener(this);
+      accountInfo.addActionListener(this);
       functions.add(accountInfo);
       
       withdraw = new JButton("Account Withdraw");
       withdraw.setFont(newButtonFont);
-      //withdraw.addActionListener(this);
+      withdraw.addActionListener(this);
       functions.add(withdraw);
       
       deposit = new JButton("Account Deposit");
       deposit.setFont(newButtonFont);
-      //deposit.addActionListener(this);
+      deposit.addActionListener(this);
       functions.add(deposit);
       
       cancel = new JButton("Cancel");
       cancel.setFont(newButtonFont);
-      //cancel.addActionListener(this);
+      cancel.addActionListener(this);
       functions.add(cancel);
       
       
@@ -122,11 +155,11 @@ public class ATMTest extends JFrame implements ActionListener{
    }
    
    @Override
-    public final void actionPerformed(final ActionEvent e) {
+    public final void actionPerformed(ActionEvent e) {
         JButton source = (JButton)e.getSource();
         if(source.equals(enter)){
             if(pinArea.getValue() != null && pinArea.getValue().toString().length() != 4){
-                JOptionPane.showMessageDialog(this, "Invalid PIN length - must be 4 digits long.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Invalid PIN - must be 4 digits long.", "Error", JOptionPane.ERROR_MESSAGE);
             }
             else{
                 JOptionPane.showMessageDialog(this, "Valid PIN length.", "Valid", JOptionPane.INFORMATION_MESSAGE);
@@ -137,7 +170,7 @@ public class ATMTest extends JFrame implements ActionListener{
             pinArea.setValue(null);
         }
         else{
-            final StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             if(pinArea.getValue() != null){
                 for(char c: pinArea.getValue().toString().toCharArray()){
                     sb.append(c);
@@ -149,6 +182,52 @@ public class ATMTest extends JFrame implements ActionListener{
                 pinArea.setValue(sb);
             }
         }
+        
+        if (e.getSource() == accountInfo){
+            info.setVisible(true);
+            front.setVisible(false);
+            welcome.setVisible(false);
+            withdrawMes.setVisible(false);
+            depositMes.setVisible(false);
+            withYes.setVisible(false);
+            depYes.setVisible(false);
+            pinArea.setValue(null);
+            textField.setValue(null);
+        }
+        if (e.getSource() == withdraw){
+            info.setVisible(false);
+            front.setVisible(false);
+            welcome.setVisible(false);
+            withdrawMes.setVisible(true);
+            depositMes.setVisible(false);
+            withYes.setVisible(false);
+            depYes.setVisible(false);
+            pinArea.setValue(null);
+            textField.setValue(null);
+        }
+        if (e.getSource() == deposit){
+            info.setVisible(false);
+            front.setVisible(false);
+            welcome.setVisible(false);
+            withdrawMes.setVisible(false);
+            depositMes.setVisible(true);
+            withYes.setVisible(false);
+            depYes.setVisible(false);
+            pinArea.setValue(null);
+            textField.setValue(null);
+        }
+        if (e.getSource() == cancel){
+            info.setVisible(false);
+            front.setVisible(false);
+            welcome.setVisible(true);
+            withdrawMes.setVisible(false);
+            depositMes.setVisible(false);
+            withYes.setVisible(false);
+            depYes.setVisible(false);
+            pinArea.setValue(null);
+            textField.setValue(null);
+        }
+        
     }
    
    //main 
