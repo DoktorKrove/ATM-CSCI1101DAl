@@ -9,13 +9,13 @@ public class User
    private int pin;
    private Account account;
    
-   public User(String firstName, String lastName, int pin, Account account)
+   public User(String firstName, String lastName,  String userID, int pin)
    {
       this.firstName = firstName;
       this.lastName = lastName;
       this.pin = pin;
-      userID = firstName+lastName;//unless you want a random id number.
-      this.account = account
+      this.userID = userID;//unless you want a random id number.
+      this.account = new Account();
    }
    
    public String getName()
@@ -37,7 +37,7 @@ public class User
    
    public boolean validatePin(int aPin)
    {
-      if (aPin = this.pin)
+      if (aPin == this.pin)
          return true;
       else
          return false;
