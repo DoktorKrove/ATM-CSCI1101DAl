@@ -19,24 +19,26 @@ public class Account
 		return balance;
 	}
 	
-
-	public void addTransaction(double amount)
-	{
-	}
-
-	
-	public void addTransaction(double amount, String memo)
-	{
-	}
-
-	
-	public String getSummaryLine()
-	{ 
-	}
-
+	public void deposit(double amount)
+   {
+      balance = balance + amount;
+      transactions.add(new Transaction(amount, "Deposit"));
+   }
+   
+   public void withdraw(double amount)
+   {
+      if(amount>balance)
+         System.out.println("Insufficient funds in account.");
+      else
+      {
+         balance = balance - amount;
+         transactions.add(new Transaction(amount, "Withdrawal"));
+      }
+   }
 
 	public void printTransactionHistory()
 	{
+      System.out.println("There have been transactions.\nLatest transaction: ");
 	} 
 
 }
