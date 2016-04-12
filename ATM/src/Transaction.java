@@ -5,13 +5,14 @@ import java.time.LocalDateTime;
 public class Transaction
 {
    private double amount;
-   private LocalDateTime timeStamp; //unsure of usage. Utilize java.time.LocalDateTime??
+   private LocalDateTime timeStamp;
+   private String type;
    
-   public Transaction(double amount)
+   public Transaction(double amount, String type)
    {
       this.amount = amount;
       this.timeStamp = LocalDateTime.now();
-
+      this.type = type;
    }
    
    public double getAmount()
@@ -19,8 +20,13 @@ public class Transaction
       return amount;
    }
    
+   public String getType()
+   {
+      return type;
+   }
+   
    public void getSummaryLine()
    {
-      System.out.println(timeStamp);
+      System.out.println(type + " at " +timeStamp);
    }
 }
