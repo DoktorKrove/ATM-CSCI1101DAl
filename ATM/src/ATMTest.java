@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
 import java.net.*;
 import java.text.ParseException;
 import javax.swing.text.MaskFormatter;
@@ -196,7 +197,20 @@ public class ATMTest extends JFrame implements ActionListener{
             withYes.setVisible(false);
             depYes.setVisible(false);
             pinArea.setValue(null);
+            
+            System.out.println(textField.getText());
+            ReadWrite rw = new ReadWrite();
+            try {
+				String something = rw.updateData(textField.getText());
+				
+				info.setText(something);
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+            
             textField.setValue(null);
+            
         }
         if (e.getSource() == withdraw){
             info.setVisible(false);
@@ -207,7 +221,7 @@ public class ATMTest extends JFrame implements ActionListener{
             withYes.setVisible(false);
             depYes.setVisible(false);
             pinArea.setValue(null);
-            textField.setValue(null);
+            //textField.setValue(null);
         }
         if (e.getSource() == deposit){
             info.setVisible(false);
@@ -218,7 +232,7 @@ public class ATMTest extends JFrame implements ActionListener{
             withYes.setVisible(false);
             depYes.setVisible(false);
             pinArea.setValue(null);
-            textField.setValue(null);
+            //textField.setValue(null);
         }
         if (e.getSource() == cancel){
             info.setVisible(false);
@@ -229,7 +243,7 @@ public class ATMTest extends JFrame implements ActionListener{
             withYes.setVisible(false);
             depYes.setVisible(false);
             pinArea.setValue(null);
-            textField.setValue(null);
+            //textField.setValue(null);
         }
         
     }
