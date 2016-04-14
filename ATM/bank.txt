@@ -1,0 +1,10 @@
+Account Information 
+BANKID:123456789
+BANKPIN:1234
+Name:Ken.H
+Chequing account balance:1337
+
+BANKID:999999999
+BANKPIN:4321
+Name:John.Smith
+Chequing account balance:8

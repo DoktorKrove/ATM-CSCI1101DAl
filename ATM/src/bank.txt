@@ -1,0 +1,6 @@
+Account Information 
+BANKID:123456789
+BANKPIN:1234
+Name:Ken.H
+Chequing account balance:1337
+

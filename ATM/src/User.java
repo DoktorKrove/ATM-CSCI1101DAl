@@ -6,12 +6,25 @@ public class User
    private String firstName;
    private String lastName;
    private String userID;
-   private byte pinHash[];//Gonna need an explination on this.
-   private ArrayList<Account> accounts;//multiple accounts per user, requires Account to be done
+   private int pin;
+   private Account account;
    
-   public User(String firstName, String lastName, String pin, Bank theBank)
+   public User(String firstName, String lastName,  String userID, int pin, double balence)
    {
-      //requires bank to be finished
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.pin = pin;
+      this.userID = userID;//unless you want a random id number.
+      this.account = new Account();
+      account.deposit(balence);
+   }
+   
+   //empty constructor version
+   public User(){}
+   
+   public String getName()
+   {
+      return firstName + " " + lastName;
    }
    
    public String getUserID()
@@ -19,60 +32,41 @@ public class User
       return userID;
    }
    
-   public void addAccount(Account acc)
+   public int getPin()
    {
-      //requires Account
+      return pin;
    }
    
-   public int numAccounts()
+   //public Account getAccount()
+   
+   public boolean validatePin(int aPin)
    {
-      //returns size of account arraylist
+      if (aPin == this.pin)
+         return true;
+      else
+         return false;
+         
    }
    
-   public double getAccBalance(int accindex)
+   //deposit a given amount
+   public void deposit(double amount)
    {
-      return this.accounts.get(accindex).getBalance();
+	   account.deposit(amount);
    }
    
-   public String getAccID(int accindex)
+   //withdraw a given amount
+   public void withdraw(double amount)
    {
-      return this.accounts.get(accindex).getUserID();
-
+	   account.withdraw(amount);
    }
    
-   public void printAccHistory(int accindex)
+   //get total moneyz
+   public double getBalance()
    {
-      this.accounts.get(accindex).printTransHistory();
+	   return account.getBalance();
    }
-   
-   public void addAccTransaction(int accindex, double amount, String memo)
+   public String AccountsSummary()
    {
-      this.accounts.get(accindex).addTransaction(amount, memo);
-   }
-   
-   public boolean validatePin(String aPin)
-   {
-      try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			return MessageDigest.isEqual(md.digest(aPin.getBytes()), this.pinHash);
-		} 
-		catch (Exception e) 
-		{
-			System.err.println("error, caught exeption : " + e.getMessage());
-			System.exit(1);
-		}
-		
-		return false;
-   }
-   
-   public void printAccountsSummary()
-   {
-      System.out.printf("\n\n%s's accounts summary\n", this.firstName);
-		for (int a = 0; a < this.accounts.size(); a++) 
-		{
-			System.out.printf("%d) %s\n", a+1, 
-					this.accounts.get(a).getSummaryLine());
-		}
-		System.out.println();
+	   return account.showTransactionLogs();
    }
 }

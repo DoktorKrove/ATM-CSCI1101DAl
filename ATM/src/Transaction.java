@@ -1,26 +1,18 @@
-import java.util.Date;
+import java.time.LocalDateTime;
 
 //Transaction class
 
 public class Transaction
 {
    private double amount;
-   private String memo;
-   //private Account inAccount; - requires account to be finished
-   private Date timeStamp; //unsure of usage. Utilize java.time.LocalDateTime??
+   private LocalDateTime timeStamp;
+   private String type;
    
-   public Transaction(double amount /*, Account inAccount*/);
+   public Transaction(double amount, String type)
    {
       this.amount = amount;
-      //this.inAccount = inAccount;
-      this.timeStamp = timeStamp;
-
-   }
-   
-   public Transaction(double amount, String memo /*, Account inAccount*/);
-   {
-      this(amount, /*inAccount*/); //call the single-arg constructor
-      this.memo = memo;
+      this.timeStamp = LocalDateTime.now();
+      this.type = type;
    }
    
    public double getAmount()
@@ -28,8 +20,13 @@ public class Transaction
       return amount;
    }
    
+   public String getType()
+   {
+      return type;
+   }
+   
    public String getSummaryLine()
    {
-      return memo;
+      return (type + " of $" + amount + " at " + timeStamp);
    }
 }
