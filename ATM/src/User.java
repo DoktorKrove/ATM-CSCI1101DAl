@@ -9,14 +9,18 @@ public class User
    private int pin;
    private Account account;
    
-   public User(String firstName, String lastName,  String userID, int pin)
+   public User(String firstName, String lastName,  String userID, int pin, double balence)
    {
       this.firstName = firstName;
       this.lastName = lastName;
       this.pin = pin;
       this.userID = userID;//unless you want a random id number.
       this.account = new Account();
+      account.deposit(balence);
    }
+   
+   //empty constructor version
+   public User(){}
    
    public String getName()
    {
@@ -44,8 +48,25 @@ public class User
          
    }
    
-   /*public void printAccountsSummary()
+   //deposit a given amount
+   public void deposit(double amount)
    {
+	   account.deposit(amount);
+   }
    
-   }*/
+   //withdraw a given amount
+   public void withdraw(double amount)
+   {
+	   account.withdraw(amount);
+   }
+   
+   //get total moneyz
+   public double getBalance()
+   {
+	   return account.getBalance();
+   }
+   public String AccountsSummary()
+   {
+	   return account.showTransactionLogs();
+   }
 }

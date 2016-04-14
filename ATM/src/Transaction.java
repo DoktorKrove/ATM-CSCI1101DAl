@@ -25,8 +25,8 @@ public class Transaction
       return type;
    }
    
-   public void getSummaryLine()
+   public String getSummaryLine()
    {
-      System.out.println(type + " at " +timeStamp);
+      return (type + " of $" + amount + " at " + timeStamp);
    }
 }

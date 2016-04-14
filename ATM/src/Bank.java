@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Bank
 {
 	private String name;
-	private ArrayList<User> users = new ArrayList<User>();
+	public ArrayList<User> users = new ArrayList<User>();
    	
 	//constructor
 	public Bank(String name)
@@ -23,12 +23,27 @@ public class Bank
       users.add(user);
    }
    
-   public boolean findUser(User user)
+   public User findUser(String userID)
    {
-      if (users.contains(user))
-         return true;
-      else
-         return false;
+      for (User user: users)
+      {
+    	  if (user.getUserID().equals(userID))
+    	  {
+    		  return user;
+    	  }
+      }
+      return null;
+   }
+   
+   public User matchPin(int pin)
+   {
+	   for (int i = 0; i < users.size(); i++)
+	   {
+		   if (users.get(i).getPin() == pin)
+			   return users.get(i);
+	   }
+	   //if a user isn't found returns null
+	   return null;
    }
 	
 	

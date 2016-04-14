@@ -21,7 +21,7 @@ public class Account
 	
 	public void deposit(double amount)
    {
-      balance = balance + amount;
+      balance += amount;
       transactions.add(new Transaction(amount, "Deposit"));
    }
    
@@ -31,7 +31,7 @@ public class Account
          System.out.println("Insufficient funds in account.");
       else
       {
-         balance = balance - amount;
+         balance -= amount;
          transactions.add(new Transaction(amount, "Withdrawal"));
       }
    }
@@ -39,6 +39,17 @@ public class Account
 	public void printTransactionHistory()
 	{
       System.out.println("There have been transactions.\nLatest transaction: ");
-	} 
+	}
+	
+	public String showTransactionLogs()
+	{
+		String list = "";
+		for (Transaction transactions: transactions)
+		{
+			list = list + transactions.getSummaryLine() + "\n";
+		}
+		
+		return list;
+	}
 
 }
